@@ -1,0 +1,25 @@
+<html>
+<body>
+ 
+<div id="divMain">
+
+	<button onclick="Globals.Instance.soundRecorder.record();">Record</button>
+	<button onclick="Globals.Instance.soundRecorder.stop();">Stop</button>
+    <label>Info:</label>
+    <input id="inputInfo" readonly="true" value="Stopped."></input>
+	<button onclick="Globals.Instance.soundRecorder.play();">Play</button>
+	<button onclick="Globals.Instance.soundRecorder.save();">Save</button>
+</div>
+
+<script type="text/javascript" src="FileHelper.js"></script>
+<script type="text/javascript" src="Globals.js"></script>
+<script type="text/javascript" src="SoundRecorder.js"></script>
+ 
+<script type="text/javascript"> 
+  
+Globals.Instance.initialize();
+ 
+</script>
+
+</body>
+</html>
