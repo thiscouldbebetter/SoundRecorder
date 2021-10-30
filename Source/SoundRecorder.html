@@ -3,20 +3,53 @@
  
 <div id="divMain">
 
+	<h3>Sound Recorder</h3>
+
+	<p>
+		Click the Record button to start recording sound
+		and press the Stop button to stop recording.
+		Press the Play button to play the recorded sound back,
+		and the Save button to output it to a .webm file.
+		Finally, upload a recorded .webm file to convert it to .wav.
+	</p>
+
 	<button onclick="Globals.Instance.soundRecorder.record();">Record</button>
 	<button onclick="Globals.Instance.soundRecorder.stop();">Stop</button>
-    <label>Info:</label>
-    <input id="inputInfo" readonly="true" value="Stopped."></input>
+	<label>Info:</label>
+	<input id="inputInfo" readonly="true" value="Stopped."></input>
 	<button onclick="Globals.Instance.soundRecorder.play();">Play</button>
-	<button onclick="Globals.Instance.soundRecorder.save();">Save</button>
+
+	<br />
+
+	<button onclick="Globals.Instance.soundRecorder.saveAsWebM();">Save as WebM</button>
+	<label>WebM File to Convert to WAV:</label>
+	<input type="file" onchange="inputWebMFileToConvertToWav_Changed(this);"></input>
 </div>
 
 <script type="text/javascript" src="FileHelper.js"></script>
 <script type="text/javascript" src="Globals.js"></script>
 <script type="text/javascript" src="SoundRecorder.js"></script>
- 
+
+<script type="text/javascript" src="WavFile/ByteConverter.js"></script>
+<script type="text/javascript" src="WavFile/ByteStreamLittleEndian.js"></script>
+<script type="text/javascript" src="WavFile/Constants.js"></script>
+<script type="text/javascript" src="WavFile/WavFile.js"></script>
+
 <script type="text/javascript"> 
-  
+
+function inputWebMFileToConvertToWav_Changed(inputWebMFileToConvertToWav)
+{
+	var file = inputWebMFileToConvertToWav.files[0];
+	FileHelper.loadFileAsArrayBuffer
+	(
+		file,
+		(fileAgain, fileContentsAsArrayBuffer) =>
+		{
+			Globals.Instance.soundRecorder.saveAsWav(fileContentsAsArrayBuffer)
+		}
+	);
+}
+
 Globals.Instance.initialize();
  
 </script>
